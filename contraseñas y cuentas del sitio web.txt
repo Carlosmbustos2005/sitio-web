@@ -1,0 +1,4 @@
+cuenta de admin: Admin (debe ser con mayuscula)
+contraseña:profesor12345
+cuenta de estudiante: estudiante
+contraseña:alumno12345
