@@ -1,0 +1,39 @@
+{% extends 'asistencia/base.html' %}
+{% load static %}
+{% block title %}Ver Costos{% endblock %}
+{% block content %}
+<h2>Costos del proyecto</h2>
+
+{% if costos %}
+  <table class="cost-table">
+    <thead>
+      <tr>
+        <th>Proyecto</th><th>Licencias</th><th>Sueldos</th><th>Despliegue</th><th>Dominio</th><th>Correos</th><th>Viáticos</th><th>Total</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for costo in costos %}
+      <tr>
+        <td>{{ costo.nombre_proyecto }}</td>
+        <td>{{ costo.licencias }}</td>
+        <td>{{ costo.sueldos }}</td>
+        <td>{{ costo.costo_despliegue }}</td>
+        <td>{{ costo.dominio }}</td>
+        <td>{{ costo.correos }}</td>
+        <td>{{ costo.viaticos }}</td>
+        <td>{{ costo.total }}</td>
+        <td>
+          {% if user.is_staff %}
+            <a class="btn" href="{% url 'admin:asistencia_costoproyecto_change' costo.id %}">Editar</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No hay registros de costos. Puedes añadir uno en <a href="/admin/">admin</a>.</p>
+{% endif %}
+
+<p><a class="btn" href="{% url 'asistencia:lista_cursos' %}">Volver</a></p>
+{% endblock %}

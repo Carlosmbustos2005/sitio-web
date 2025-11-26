@@ -1,0 +1,23 @@
+{% extends 'asistencia/base.html' %}
+{% block title %}Cursos{% endblock %}
+{% block content %}
+<h2>Mis cursos</h2>
+
+{% if cursos %}
+  <ul class="course-list">
+    {% for curso in cursos %}
+    <li class="course-item">
+      <strong>{{ curso.nombre }}</strong>
+      <div class="actions">
+        <a class="btn" href="{% url 'asistencia:pasar_lista' curso.id %}">Ver personas</a>
+        {% if user.is_staff %}
+          <a class="btn" href="{% url 'admin:asistencia_curso_change' curso.id %}">Editar</a>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No hay cursos aún. Crea uno en el <a href="/admin/">admin</a>.</p>
+{% endif %}
+{% endblock %}

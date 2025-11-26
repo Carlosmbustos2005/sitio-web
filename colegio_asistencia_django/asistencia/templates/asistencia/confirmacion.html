@@ -1,0 +1,7 @@
+{% extends 'asistencia/base.html' %}
+{% block title %}Confirmación{% endblock %}
+{% block content %}
+<h2>Asistencia guardada</h2>
+<p>Se registró la asistencia para el curso <strong>{{ curso.nombre }}</strong> en la fecha {{ fecha }}.</p>
+<p><a class="btn" href="{% url 'asistencia:lista_cursos' %}">Volver a cursos</a></p>
+{% endblock %}

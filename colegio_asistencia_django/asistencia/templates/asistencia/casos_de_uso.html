@@ -1,0 +1,13 @@
+{% extends 'asistencia/base.html' %}
+{% block title %}Casos de uso{% endblock %}
+{% block content %}
+<h2>Casos de uso del sistema de asistencia</h2>
+<ul>
+    {% for caso in casos %}
+    <li>
+        <strong>{{ caso.codigo }} - {{ caso.nombre }}</strong><br>
+        {{ caso.descripcion }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

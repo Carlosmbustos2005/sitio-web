@@ -1,0 +1,37 @@
+{% extends 'asistencia/base.html' %}
+{% block title %}Pasar lista{% endblock %}
+{% block content %}
+<h2>{{ curso.nombre }} — Personas</h2>
+<p>Fecha: {{ fecha_hoy }}</p>
+
+{% if user.is_staff %}
+<form method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <th>Estudiante</th>
+            <th>Presente</th>
+            <th>Ausente</th>
+            <th>Justificado</th>
+            <th>Atrasado</th>
+        </tr>
+        {% for estudiante in estudiantes %}
+        <tr>
+            <td>{{ estudiante.nombres }} {{ estudiante.apellidos }}</td>
+            <td><input type="radio" name="estado_{{ estudiante.id }}" value="P" required></td>
+            <td><input type="radio" name="estado_{{ estudiante.id }}" value="A"></td>
+            <td><input type="radio" name="estado_{{ estudiante.id }}" value="J"></td>
+            <td><input type="radio" name="estado_{{ estudiante.id }}" value="T"></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <input type="submit" value="Guardar asistencia" class="btn">
+</form>
+{% else %}
+  <ul class="course-list">
+    {% for estudiante in estudiantes %}
+      <li class="course-item">{{ estudiante.nombres }} {{ estudiante.apellidos }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

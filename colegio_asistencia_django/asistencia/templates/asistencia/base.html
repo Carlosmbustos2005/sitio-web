@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <title>{% block title %}Asistencia{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'asistencia/css/style.css' %}">
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+</head>
+<body class="theme">
+  <div class="vaporwave-bg" aria-hidden="true"></div>  <!-- elemento decorativo vaporwave -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand"><a href="{% url 'asistencia:lista_cursos' %}">Asistencia Escolar</a></h1>
+      <nav class="main-nav">
+        <a href="{% url 'asistencia:lista_cursos' %}">Cursos</a>
+        {% if user.is_staff %}
+          <a href="{% url 'asistencia:ver_costos' %}">Costos</a>
+          <a href="{% url 'asistencia:casos_de_uso' %}">Casos de uso</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+          <span class="user">Usuario: {{ user.username }}</span>
+          <a href="{% url 'logout' %}">Salir</a>
+        {% else %}
+          <a href="{% url 'login' %}">Entrar</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© hecho por carlos muñoz - Sistema de Asistencia</div>
+  </footer>
+</body>
+</html>

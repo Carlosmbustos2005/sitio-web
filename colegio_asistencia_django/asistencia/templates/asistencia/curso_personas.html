@@ -1,0 +1,35 @@
+{% extends 'asistencia/base.html' %}
+{% block title %}Personas en {{ curso.nombre }}{% endblock %}
+{% block content %}
+  <div class="hero">
+    <div>
+      <h2>Personas — {{ curso.nombre }}</h2>
+      <p class="subtitle">Listado de estudiantes activos del curso (vista solo lectura).</p>
+    </div>
+    <div class="logo-badge">Curso</div>
+  </div>
+
+  {% if estudiantes %}
+    <ul class="course-list">
+      {% for estudiante in estudiantes %}
+        <li class="course-item">
+          <div>
+            <strong>{{ estudiante.nombres }} {{ estudiante.apellidos }}</strong>
+            <div style="color:rgba(255,255,255,0.75); font-size:0.9rem;">ID: {{ estudiante.id }}</div>
+          </div>
+          {% if user.is_staff %}
+            <div class="actions">
+              <a class="btn ghost" href="{% url 'admin:asistencia_estudiante_change' estudiante.id %}">Editar</a>
+            </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay estudiantes en este curso.</p>
+  {% endif %}
+
+  <p class="center" style="margin-top:18px;">
+    <a class="btn" href="{% url 'asistencia:lista_cursos' %}">Volver a cursos</a>
+  </p>
+{% endblock %}
